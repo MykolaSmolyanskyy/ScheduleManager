@@ -1,4 +1,4 @@
-package cgm.ScheduleManager.dao.impl;
+package com.ScheduleManager.dao.impl;
 
 import java.util.Collections;
 import java.util.List;
@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import cgm.ScheduleManager.dao.UserDAO;
-import cgm.ScheduleManager.model.User;
-import cgm.ScheduleManager.dao.EventDAO;
-import cgm.ScheduleManager.model.Event;
+import com.ScheduleManager.dao.UserDAO;
+import com.ScheduleManager.model.User;
+import com.ScheduleManager.dao.EventDAO;
+import com.ScheduleManager.model.Event;
 
 /**
  * @author Alex Bilobrovets

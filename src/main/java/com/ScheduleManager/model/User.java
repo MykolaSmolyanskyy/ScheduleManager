@@ -1,4 +1,4 @@
-package cgm.ScheduleManager.model;
+package com.ScheduleManager.model;
 
 /**
  * @author Alex Bilobrovets

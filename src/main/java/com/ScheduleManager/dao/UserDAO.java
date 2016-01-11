@@ -1,8 +1,8 @@
-package cgm.ScheduleManager.dao;
+package com.ScheduleManager.dao;
 
 import java.util.Optional;
 
-import cgm.ScheduleManager.model.User;
+import com.ScheduleManager.model.User;
 
 /**
  * @author Alex Bilobrovets
