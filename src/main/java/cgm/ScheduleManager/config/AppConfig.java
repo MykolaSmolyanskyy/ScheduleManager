@@ -16,8 +16,8 @@ import cgm.ScheduleManager.dao.impl.JdbcUserDAO;
  * @author Alex Bilobrovets
  */
 @Configuration
-@ComponentScan("cgm.us.ais.common.smanager")
 @EnableWebMvc
+@ComponentScan("cgm.ScheduleManager")
 public class AppConfig
 {
     @Bean
