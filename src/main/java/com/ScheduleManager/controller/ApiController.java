@@ -71,7 +71,16 @@ public class ApiController
         Cookie cookieUsername = new Cookie("username", user.getLogin());
 
         cookieId.setMaxAge(60 * 10);
+        cookieId.setDomain("127.0.0.1");
+        cookieId.setPath("/");
+        cookieId.setHttpOnly(false);
+        cookieId.setSecure(false);
+
         cookieUsername.setMaxAge(60 * 10);
+        cookieUsername.setDomain("127.0.0.1");
+        cookieUsername.setPath("/");
+        cookieUsername.setHttpOnly(false);
+        cookieUsername.setSecure(false);
 
         response.addCookie(cookieId);
         response.addCookie(cookieUsername);
