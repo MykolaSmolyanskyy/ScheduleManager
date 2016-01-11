@@ -1,4 +1,4 @@
-package cgm.us.ais.common.smanager.dao.impl;
+package cgm.ScheduleManager.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import cgm.us.ais.common.smanager.dao.UserDAO;
-import cgm.us.ais.common.smanager.model.User;
+import cgm.ScheduleManager.dao.UserDAO;
+import cgm.ScheduleManager.model.User;
 
 /**
  * @author Alex Bilobrovets

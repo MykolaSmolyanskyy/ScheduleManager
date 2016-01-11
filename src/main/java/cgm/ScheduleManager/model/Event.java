@@ -1,4 +1,4 @@
-package cgm.us.ais.common.smanager.model;
+package cgm.ScheduleManager.model;
 
 import java.util.Date;
 
