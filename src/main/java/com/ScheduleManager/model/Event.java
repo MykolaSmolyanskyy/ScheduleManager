@@ -1,4 +1,4 @@
-package cgm.ScheduleManager.model;
+package com.ScheduleManager.model;
 
 import java.util.Date;
 
@@ -92,14 +92,6 @@ public class Event
     @Override
     public String toString()
     {
-        return "Event{" +
-          "id=" + id +
-          ", user=" + user +
-          ", title='" + title + '\'' +
-          ", allDay=" + allDay +
-          ", type='" + type + '\'' +
-          ", startDate=" + startDate +
-          ", endDate=" + endDate +
-          '}';
+        return String.format("Event{id=%d, user=%s, title='%s', allDay=%s, type='%s', startDate=%s, endDate=%s}", id, user, title, allDay, type, startDate, endDate);
     }
 }

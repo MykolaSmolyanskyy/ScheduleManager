@@ -1,4 +1,4 @@
-package cgm.ScheduleManager.model;
+package com.ScheduleManager.model;
 
 /**
  * @author Alex Bilobrovets
@@ -57,11 +57,6 @@ public class User
     @Override
     public String toString()
     {
-        return "User{" +
-          "id=" + id +
-          ", login='" + login + '\'' +
-          ", pwd='" + pwd + '\'' +
-          ", name='" + name + '\'' +
-          '}';
+        return String.format("User{id=%d, login='%s', pwd='%s', name='%s'}", id, login, pwd, name);
     }
 }

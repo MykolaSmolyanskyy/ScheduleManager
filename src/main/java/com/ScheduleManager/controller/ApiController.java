@@ -1,4 +1,4 @@
-package cgm.ScheduleManager.controller;
+package com.ScheduleManager.controller;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cgm.ScheduleManager.dao.EventDAO;
-import cgm.ScheduleManager.dao.UserDAO;
-import cgm.ScheduleManager.model.Event;
-import cgm.ScheduleManager.model.User;
+import com.ScheduleManager.dao.EventDAO;
+import com.ScheduleManager.dao.UserDAO;
+import com.ScheduleManager.model.Event;
+import com.ScheduleManager.model.User;
 
 /**
  * @author Alex Bilobrovets
@@ -102,12 +102,12 @@ public class ApiController
         List<JsonObject> jsonObjects = events.stream().map(
           e ->
             Json.createObjectBuilder()
-                       .add("title", e.getTitle())
-                       .add("add_day", e.isAllDay())
-                       .add("type", e.getType())
-                       .add("start", DATE_TIME.format(e.getStartDate()))
-                       .add("end", e.getEndDate() == null ? "" : DATE_TIME.format(e.getEndDate()))
-                       .build()
+                .add("title", e.getTitle())
+                .add("add_day", e.isAllDay())
+                .add("type", e.getType())
+                .add("start", DATE_TIME.format(e.getStartDate()))
+                .add("end", e.getEndDate() == null ? "" : DATE_TIME.format(e.getEndDate()))
+                .build()
         ).collect(Collectors.toList());
 
         JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
