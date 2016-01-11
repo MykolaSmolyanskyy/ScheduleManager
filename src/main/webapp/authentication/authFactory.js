@@ -63,7 +63,7 @@ app.factory('authFactory', ['$q', '$http', '$cookies', 'URL_CONSTANTS',
         };
 
         _isAuthenticated = function () {
-            var userId = $cookies.getObject('id');
+            var userId = $cookies.get('id');
 
             return userId ? true : false;
         };
