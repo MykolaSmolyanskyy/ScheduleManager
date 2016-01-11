@@ -24,12 +24,8 @@ var app = angular.module('SchedulingManager', ['ngRoute', 'ui.calendar', 'ui.boo
                 templateUrl: 'authentication/login.html',
                 controller: 'AuthController'
             })
-            .when('/', {
-                templateUrl: 'scheduler/scheduler.html',
-                controller: 'SchedulerController'
-            })
             .otherwise({
-                redirectTo: '/'
+                redirectTo: '/calendar'
             });
     }])
     .constant('_', window._);

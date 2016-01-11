@@ -21,12 +21,17 @@ app.controller('SchedulerController', [
     '$compile',
     'eventsFactory',
     'eventsHelperFactory',
-    function ($scope, $location, authFactory, $log, $compile, eventsFactory, eventsHelperFactory) {
-        $scope.username = authFactory.getUserName();
+    'ScheduleObserver',
+    function ($scope, $location, authFactory, $log, $compile, eventsFactory, eventsHelperFactory, ScheduleObserver) {
+        var observer = new ScheduleObserver(),
+            init,
+            getEvents;
+
         $scope.events = [];
         $scope.eventSources = [];
+        $scope.scheduleButtonClicked = false;
 
-        var init = function () {
+        init = function () {
             /* event source that pulls from google.com */
             $scope.eventSource = {
                 className: 'gcal-event',           // configured option
@@ -69,14 +74,24 @@ app.controller('SchedulerController', [
             $scope.eventSources.push($scope.eventSource);
         };
 
-        eventsFactory.getEventsByUserId(authFactory.getUserId()).then(function (events) {
-            var res = eventsHelperFactory.sortEvents(events);
-            for (var i = 0; i < res.length; i++) {
-                $scope.events.push(res[i]);
+        getEvents = function(){
+            eventsFactory.getEventsByUserId(authFactory.getUserId()).then(function (events) {
+                $scope.scheduleButtonClicked = true;
+                var res = eventsHelperFactory.sortEvents(events);
+                for (var i = 0; i < res.length; i++) {
+                    $scope.events.push(res[i]);
+                }
+                init();
+            }, function (err) {
+                $log.error(err);
+            });
+        };
+
+        observer.subscribe(getEvents);
+
+        $scope.$on('$destroy', function () {
+                observer.unsubscribe(getEvents);
             }
-            init();
-        }, function (err) {
-            $log.error(err);
-        });
+        );
     }
 ]);
