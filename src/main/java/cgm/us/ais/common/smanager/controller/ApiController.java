@@ -25,7 +25,6 @@ import cgm.us.ais.common.smanager.model.User;
  * @author Alex Bilobrovets
  */
 @Controller
-//@RequestMapping(value = "/api")
 public class ApiController
 {
     private static final SimpleDateFormat DATE_TIME = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -72,7 +71,7 @@ public class ApiController
 
     @ResponseBody
     @RequestMapping(value = "/logout", produces = "application/json")
-    public void logout(HttpServletResponse response, HttpSession session)
+    public void logout(HttpSession session)
     {
         session.invalidate();
     }

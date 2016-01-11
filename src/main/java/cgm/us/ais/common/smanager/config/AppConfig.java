@@ -32,16 +32,6 @@ public class AppConfig
         return new JdbcEventDAO();
     }
 
-    //@Bean
-    //public ViewResolver configureViewResolver()
-    //{
-    //    InternalResourceViewResolver viewResolve = new InternalResourceViewResolver();
-    //    viewResolve.setPrefix("/WEB-INF/");
-    //    viewResolve.setSuffix(".jsp");
-    //
-    //    return viewResolve;
-    //}
-
     @Bean
     public JdbcTemplate dataSource()
     {
