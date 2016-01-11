@@ -35,12 +35,17 @@ html, body {
     padding:0.5rem;
 }
 
-.navbar-nav li {
+.navbar-nav .nav-item + .nav-item  {
     margin-left: 0;
+}
+
+.navbar-nav .nav-item {
+    float: none;
 }
 
 .navbar-nav .nav-item button {
     float: none;
+    width: 100%;
     padding: .5rem .75rem;
     font-size: 1.25rem;
     line-height: 1;
@@ -49,4 +54,5 @@ html, body {
     border-radius: .25rem;
     white-space: nowrap;
     text-overflow: ellipsis;
+    text-align: left;
 }
