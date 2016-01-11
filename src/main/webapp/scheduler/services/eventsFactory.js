@@ -19,7 +19,7 @@ app.factory('eventsFactory', ['$q', '$http', '$log', 'URL_CONSTANTS',
         _getEventsByUserId = function (userId) {
             var deferred = $q.defer();
 
-            $http.get(URL_CONSTANTS.BASE_URL + 'calendar', userId).success(function (events) {
+            $http.get(URL_CONSTANTS.BASE_URL + 'calendar?userId=' + userId).success(function (events) {
                 deferred.resolve(events);
             }).error(function (error) {
                 $log.error(error);

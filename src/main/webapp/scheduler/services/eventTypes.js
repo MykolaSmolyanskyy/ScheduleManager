@@ -6,8 +6,8 @@
  */
 
 app.constant('EVENT_TYPES', {
-            PARTY: 'party',
-            MEETING: 'meeting',
-            BIRTHDAY: 'birthday'
+        DEVELOPMENT: 'Development',
+        FREE_TIME: 'Free time',
+        MEETING: 'Meeting'
     }
 );

@@ -22,6 +22,7 @@ app.controller('SchedulerController', [
     'eventsFactory',
     'eventsHelperFactory',
     'ScheduleObserver',
+    'authFactory',
     function ($scope, $location, authFactory, $log, $compile, eventsFactory, eventsHelperFactory, ScheduleObserver) {
         var observer = new ScheduleObserver(),
             init,

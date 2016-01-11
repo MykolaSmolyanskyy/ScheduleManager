@@ -4,6 +4,7 @@ import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
@@ -46,6 +47,7 @@ public class ApiController
     @RequestMapping(value = "/login", produces = "application/json")
     public String login(@RequestParam("username") String login,
                         @RequestParam("password") String password,
+                        HttpServletRequest request,
                         HttpServletResponse response,
                         HttpSession session)
     {
@@ -54,6 +56,7 @@ public class ApiController
         if (!oUser.isPresent())
         {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            invalidateCookies(request, response);
             return null;
         }
 
@@ -62,6 +65,7 @@ public class ApiController
         if (!user.getPwd().equals(password))
         {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            invalidateCookies(request, response);
             return null;
         }
 
@@ -71,13 +75,11 @@ public class ApiController
         Cookie cookieUsername = new Cookie("username", user.getLogin());
 
         cookieId.setMaxAge(60 * 10);
-        cookieId.setDomain("127.0.0.1");
         cookieId.setPath("/");
         cookieId.setHttpOnly(false);
         cookieId.setSecure(false);
 
         cookieUsername.setMaxAge(60 * 10);
-        cookieUsername.setDomain("127.0.0.1");
         cookieUsername.setPath("/");
         cookieUsername.setHttpOnly(false);
         cookieUsername.setSecure(false);
@@ -94,14 +96,17 @@ public class ApiController
 
     @ResponseBody
     @RequestMapping(value = "/logout", produces = "application/json")
-    public void logout(HttpSession session)
+    public void logout(HttpServletRequest request, HttpServletResponse response, HttpSession session)
     {
         session.invalidate();
+
+        invalidateCookies(request, response);
     }
 
     @ResponseBody
     @RequestMapping(value = "/calendar", produces = "application/json")
     public String calendar(@RequestParam("userId") int userId,
+                           HttpServletRequest request,
                            HttpServletResponse response,
                            HttpSession session)
     {
@@ -109,6 +114,7 @@ public class ApiController
         if (id == null || id != userId)
         {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            invalidateCookies(request, response);
             return null;
         }
 
@@ -117,6 +123,7 @@ public class ApiController
         if (!oUser.isPresent())
         {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            invalidateCookies(request, response);
             return null;
         }
 
@@ -137,5 +144,24 @@ public class ApiController
         jsonObjects.forEach(jsonArrayBuilder::add);
 
         return jsonArrayBuilder.build().toString();
+    }
+
+    private void invalidateCookies(HttpServletRequest request, HttpServletResponse response)
+    {
+        Cookie[] cookies = request.getCookies();
+
+        if (cookies != null)
+        {
+            for (Cookie cookie : cookies)
+            {
+                if (cookie.getValue().equals("id") || cookie.getValue().equals("username"))
+                {
+                    cookie.setValue(null);
+                    cookie.setMaxAge(0);
+                    cookie.setPath("/");
+                    response.addCookie(cookie);
+                }
+            }
+        }
     }
 }

@@ -32,6 +32,10 @@
                 replace: true,
                 templateUrl: 'shell/navigation/navigation.html',
                 link: function ($scope) {
+                    if(!authFactory.isAuthenticated()){
+                        $location.path('/login');
+                        return;
+                    }
                     var scheduleObserver = new ScheduleObserver();
 
                     $scope.username = authFactory.getUserName();

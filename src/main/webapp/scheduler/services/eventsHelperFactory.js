@@ -35,17 +35,17 @@ app.factory('eventsHelperFactory', ['EVENT_TYPES',
             _.forEach(events, function (evt) {
                 evt.start = new Date(evt.start);
                 switch (evt.type) {
-                    case EVENT_TYPES.BIRTHDAY:
+                    case EVENT_TYPES.MEETING:
                     {
                         birthdayEvents.events.push(evt);
                         break;
                     }
-                    case EVENT_TYPES.MEETING:
+                    case EVENT_TYPES.FREE_TIME:
                     {
                         meetingEvents.events.push(evt);
                         break;
                     }
-                    case EVENT_TYPES.PARTY:
+                    case EVENT_TYPES.DEVELOPMENT:
                     {
                         partyEvents.events.push(evt);
                         break;

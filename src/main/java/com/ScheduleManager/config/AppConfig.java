@@ -60,10 +60,11 @@ public class AppConfig
 
         jdbcTemplate.execute("INSERT INTO event VALUES(1, 1, 'CGM Scheduler Backend', '1', 1, '2016-01-11 12:30:00', null)");
         jdbcTemplate.execute("INSERT INTO event VALUES(2, 1, 'Lunch', '0', 2, '2016-01-11 12:30:00', '2016-01-11 13:30:00')");
-        jdbcTemplate.execute("INSERT INTO event VALUES(3, 1, 'Meeting', '0', 3, '2016-01-11 15:10:00', '2016-01-11 15:40:00')");
+        jdbcTemplate.execute("INSERT INTO event VALUES(3, 1, 'Meeting', '0', 3, '2016-01-12 15:10:00', '2016-01-12 15:40:00')");
+        jdbcTemplate.execute("INSERT INTO event VALUES(4, 1, 'Meeting', '0', 3, '2016-01-15 16:10:00', '2016-01-15 16:40:00')");
 
-        jdbcTemplate.execute("INSERT INTO event VALUES(4, 2, 'CGM Scheduler Frontend', '1', 1, '2016-01-11 12:30:00', null)");
-        jdbcTemplate.execute("INSERT INTO event VALUES(5, 2, 'Lunch', '0', 2, '2016-01-11 13:15:00', '2016-01-11 14:15:00')");
+        jdbcTemplate.execute("INSERT INTO event VALUES(5, 2, 'CGM Scheduler Frontend', '1', 1, '2016-01-11 12:30:00', null)");
+        jdbcTemplate.execute("INSERT INTO event VALUES(6, 2, 'Lunch', '0', 2, '2016-01-11 13:15:00', '2016-01-11 14:15:00')");
 
         return jdbcTemplate;
     }
