@@ -13,18 +13,19 @@
  * Contains service for authentication
  */
 
-app.factory('authFactory', ['$q', '$http', '$cookies',
-    function ($q, $http, $cookies) {
+app.factory('authFactory', ['$q', '$http', '$cookies', 'URL_CONSTANTS',
+    function ($q, $http, $cookies, URL_CONSTANTS) {
         var _login,
             _logout,
             _getUserName,
             _isAuthenticated,
-            _getUserId;
+            _getUserId,
+            _clearCookies;
 
         _login = function (credentials) {
             var deferred = $q.defer();
-            //TODO: replace url with constant
-            $http.post('http://localhost:6587/api/login', credentials).success(function (data) {
+
+            $http.post(URL_CONSTANTS.BASE_URL + 'login', credentials).success(function (data) {
                 deferred.resolve(data);
             }).error(function (error) {
                 console.error(error);
@@ -36,7 +37,8 @@ app.factory('authFactory', ['$q', '$http', '$cookies',
 
         _logout = function () {
             var deferred = $q.defer();
-            $http.get('http://localhost:6587/api/logout').success(function (data) {
+
+            $http.get(URL_CONSTANTS.BASE_URL + 'logout').success(function (data) {
                 deferred.resolve(data);
             }).error(function (error) {
                 console.error(error);
@@ -65,6 +67,10 @@ app.factory('authFactory', ['$q', '$http', '$cookies',
             }
 
             return false;
+        };
+
+        _clearCookies = function(){
+            $cookies.remove('currentUser');
         };
 
         return {
@@ -122,7 +128,17 @@ app.factory('authFactory', ['$q', '$http', '$cookies',
              * @description
              * Gets user id
              */
-            getUserId: _getUserId
+            getUserId: _getUserId,
+
+            /**
+             * @ngdoc method
+             * @module SchedulingManager
+             * @name authFactory#clearCookies
+             *
+             * @description
+             * Clears current user from cookies
+             */
+            clearCookies: _clearCookies
         };
     }
 ]);

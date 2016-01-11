@@ -24,16 +24,15 @@
      * ```
      *
      */
-    app.directive('navigationDirective', ['ScheduleObserver', 'LogoutObserver', 'authFactory',
-        function (ScheduleObserver, LogoutObserver, authFactory) {
+    app.directive('navigationDirective', ['ScheduleObserver', 'authFactory', '$log', '$location',
+        function (ScheduleObserver, authFactory, $log, $location) {
             return {
                 scope: {},
                 restrict: 'E',
                 replace: true,
                 templateUrl: 'shell/navigation/navigation.html',
                 link: function ($scope) {
-                    var scheduleObserver = new ScheduleObserver(),
-                        logoutObserver = new ScheduleObserver();
+                    var scheduleObserver = new ScheduleObserver();
 
                     $scope.username = authFactory.getUserName();
 
@@ -42,7 +41,16 @@
                     };
 
                     $scope.logoutClick = function () {
-                        logoutObserver.notifyAllSubscribers();
+                        authFactory.logout().then(function(){
+                            authFactory.clearCookies();
+                            $location.path('/login');
+                        }, function(err){
+                            $log.error(err);
+                        });
+                    };
+
+                    $scope.toggleMenu = function () {
+                        $scope.isMenuHidden = !$scope.isMenuHidden;
                     };
                 }
             };

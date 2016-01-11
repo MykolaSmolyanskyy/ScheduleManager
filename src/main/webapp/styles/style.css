@@ -9,11 +9,44 @@ html, body {
     margin-top: 20vh;
 }
 
-.sm-profile-image
-{
+.sm-profile-image {
     margin: 0 auto 10px;
     display: block;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
     border-radius: 50%;
+}
+
+.sm-navbar-vertical {
+    width: 20%;
+    height: 100%;
+    background-color:#BB6688;
+    display: inline-block;
+    float: left;
+    padding:0.5rem;
+    min-width: 3rem;
+}
+
+.sm-calendar-wrapper {
+    width: 80%;
+    height: 100%;
+    display: inline-block;
+    float: left;
+    padding:0.5rem;
+}
+
+.navbar-nav li {
+    margin-left: 0;
+}
+
+.navbar-nav .nav-item button {
+    float: none;
+    padding: .5rem .75rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    background: none;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: .25rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
