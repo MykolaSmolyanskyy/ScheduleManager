@@ -13,12 +13,14 @@
  * Contains logic for user login
  */
 
-app.controller('AuthController', ['$scope', '$location', 'authFactory', '$log',
-    function ($scope, $location, authFactory, $log) {
+app.controller('AuthController', ['$scope', '$location', 'authFactory', '$log', 'LogoutObserver',
+    function ($scope, $location, authFactory, $log, LogoutObserver) {
         $scope.currentUser = {
             username: '',
             password: ''
         };
+
+        var observer = new LogoutObserver();
 
         $scope.logIn = function(){
             authFactory.login($scope.currentUser).then(function(data){
@@ -32,5 +34,20 @@ app.controller('AuthController', ['$scope', '$location', 'authFactory', '$log',
                 $log.error(err);
             });
         };
+
+        $scope.logOut = function(){
+            authFactory.logout().then(function(){
+                $location.path('/login');
+            }, function(err){
+                $log.error(err);
+            });
+        };
+
+        observer.subscribe($scope.logOut);
+
+        $scope.$on('$destroy', function () {
+                observer.unsubscribe($scope.logOut);
+            }
+        );
     }
 ]);
