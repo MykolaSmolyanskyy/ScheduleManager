@@ -25,9 +25,9 @@ app.factory('authFactory', ['$q', '$http', '$cookies', 'URL_CONSTANTS',
         _login = function (credentials) {
             var deferred = $q.defer();
 
-            $http.post(URL_CONSTANTS.BASE_URL + 'login?username='+credentials.username + '&password='+ credentials.password, {}).success(function (data, status) {
-                if(status == '401'){
-                   deferred.resolve('Error. Please check your credentials.')
+            $http.post(URL_CONSTANTS.BASE_URL + 'login?username=' + credentials.username + '&password=' + credentials.password, {}).success(function (data, status) {
+                if (status == '401') {
+                    deferred.resolve('Error. Please check your credentials.')
                 }
 
                 deferred.resolve(data);
@@ -53,28 +53,24 @@ app.factory('authFactory', ['$q', '$http', '$cookies', 'URL_CONSTANTS',
         };
 
         _getUserName = function () {
-            var user = $cookies.getObject('currentUser');
-            return user && user.username ? user.username : null;
+            var username = $cookies.get('username');
+            return username ? username : null;
         };
 
         _getUserId = function () {
-            var user = $cookies.getObject('currentUser');
-            return user && user.id ? user.id : null;
+            var userId = $cookies.get('id');
+            return userId ? userId : null;
         };
 
-        _isAuthenticated = function(){
-            var user = $cookies.getObject('currentUser'),
-                expDate;
-            if (user && user.expDate){
-                expDate = new Date(user.expDate);
-                return expDate.getTime() >= new Date().getTime();
-            }
+        _isAuthenticated = function () {
+            var userId = $cookies.getObject('id');
 
-            return false;
+            return userId ? true : false;
         };
 
-        _clearCookies = function(){
-            $cookies.remove('currentUser');
+        _clearCookies = function () {
+            $cookies.remove('username');
+            $cookies.remove('id');
         };
 
         return {
