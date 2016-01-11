@@ -21,9 +21,16 @@ app.controller('AuthController', ['$scope', '$location', 'authFactory', '$log',
         };
 
         $scope.logIn = function(){
+
+            if ($scope.loginForm.$invalid){
+                $scope.loginForm.password.$setDirty();
+                $scope.loginForm.username.$setDirty();
+                return;
+            }
+
             authFactory.login($scope.currentUser).then(function(data){
-                if (!data && !data.username){
-                    $location.path('/login');
+                if (!data.username){
+                    $scope.loginError = data;
                     return;
                 }
 

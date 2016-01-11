@@ -25,7 +25,11 @@ app.factory('authFactory', ['$q', '$http', '$cookies', 'URL_CONSTANTS',
         _login = function (credentials) {
             var deferred = $q.defer();
 
-            $http.post(URL_CONSTANTS.BASE_URL + 'login', credentials).success(function (data) {
+            $http.post(URL_CONSTANTS.BASE_URL + 'login?username='+credentials.username + '&password='+ credentials.password, {}).success(function (data, status) {
+                if(status == '401'){
+                   deferred.resolve('Error. Please check your credentials.')
+                }
+
                 deferred.resolve(data);
             }).error(function (error) {
                 console.error(error);
