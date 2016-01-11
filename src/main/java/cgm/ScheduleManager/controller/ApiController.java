@@ -1,4 +1,4 @@
-package cgm.us.ais.common.smanager.controller;
+package cgm.ScheduleManager.controller;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cgm.us.ais.common.smanager.dao.EventDAO;
-import cgm.us.ais.common.smanager.dao.UserDAO;
-import cgm.us.ais.common.smanager.model.Event;
-import cgm.us.ais.common.smanager.model.User;
+import cgm.ScheduleManager.dao.EventDAO;
+import cgm.ScheduleManager.dao.UserDAO;
+import cgm.ScheduleManager.model.Event;
+import cgm.ScheduleManager.model.User;
 
 /**
  * @author Alex Bilobrovets

@@ -1,8 +1,8 @@
-package cgm.us.ais.common.smanager.dao;
+package cgm.ScheduleManager.dao;
 
 import java.util.Optional;
 
-import cgm.us.ais.common.smanager.model.User;
+import cgm.ScheduleManager.model.User;
 
 /**
  * @author Alex Bilobrovets

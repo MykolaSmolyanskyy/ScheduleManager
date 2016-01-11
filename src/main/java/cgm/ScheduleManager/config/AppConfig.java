@@ -1,4 +1,4 @@
-package cgm.us.ais.common.smanager.config;
+package cgm.ScheduleManager.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -7,17 +7,17 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import cgm.us.ais.common.smanager.dao.EventDAO;
-import cgm.us.ais.common.smanager.dao.UserDAO;
-import cgm.us.ais.common.smanager.dao.impl.JdbcEventDAO;
-import cgm.us.ais.common.smanager.dao.impl.JdbcUserDAO;
+import cgm.ScheduleManager.dao.EventDAO;
+import cgm.ScheduleManager.dao.UserDAO;
+import cgm.ScheduleManager.dao.impl.JdbcEventDAO;
+import cgm.ScheduleManager.dao.impl.JdbcUserDAO;
 
 /**
  * @author Alex Bilobrovets
  */
 @Configuration
-@ComponentScan("cgm.us.ais.common.smanager")
 @EnableWebMvc
+@ComponentScan("cgm.ScheduleManager")
 public class AppConfig
 {
     @Bean
