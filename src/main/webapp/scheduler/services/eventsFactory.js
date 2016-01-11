@@ -12,14 +12,14 @@
  * @description
  * Contains service for getting all user's events
  */
-app.factory('eventsFactory', ['$q', '$http', '$log',
-    function ($q, $http, $log) {
+app.factory('eventsFactory', ['$q', '$http', '$log', 'URL_CONSTANTS',
+    function ($q, $http, $log, URL_CONSTANTS) {
         var _getEventsByUserId;
 
         _getEventsByUserId = function (userId) {
             var deferred = $q.defer();
-            //TODO: replace url with constant
-            $http.get('http://localhost:6587/api/calendar', userId).success(function (events) {
+
+            $http.get(URL_CONSTANTS.BASE_URL + 'calendar', userId).success(function (events) {
                 deferred.resolve(events);
             }).error(function (error) {
                 $log.error(error);
