@@ -6,6 +6,6 @@
  */
 
 app.constant('URL_CONSTANTS', {
-        BASE_URL: 'http://localhost:6587/api/'
+        BASE_URL: 'http://localhost:8080/api/'
     }
 );

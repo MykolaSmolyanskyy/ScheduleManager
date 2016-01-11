@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import com.ScheduleManager.dao.UserDAO;
-import com.ScheduleManager.model.User;
 import com.ScheduleManager.dao.EventDAO;
+import com.ScheduleManager.dao.UserDAO;
 import com.ScheduleManager.model.Event;
+import com.ScheduleManager.model.User;
 
 /**
  * @author Alex Bilobrovets
@@ -50,6 +50,7 @@ public class JdbcEventDAO implements EventDAO
 
               return e;
           }
-        , userId);
+          , userId
+        );
     }
 }

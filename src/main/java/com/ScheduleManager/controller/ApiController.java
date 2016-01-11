@@ -102,12 +102,12 @@ public class ApiController
         List<JsonObject> jsonObjects = events.stream().map(
           e ->
             Json.createObjectBuilder()
-                       .add("title", e.getTitle())
-                       .add("add_day", e.isAllDay())
-                       .add("type", e.getType())
-                       .add("start", DATE_TIME.format(e.getStartDate()))
-                       .add("end", e.getEndDate() == null ? "" : DATE_TIME.format(e.getEndDate()))
-                       .build()
+                .add("title", e.getTitle())
+                .add("add_day", e.isAllDay())
+                .add("type", e.getType())
+                .add("start", DATE_TIME.format(e.getStartDate()))
+                .add("end", e.getEndDate() == null ? "" : DATE_TIME.format(e.getEndDate()))
+                .build()
         ).collect(Collectors.toList());
 
         JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
