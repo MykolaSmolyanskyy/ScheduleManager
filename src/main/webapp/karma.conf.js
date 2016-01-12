@@ -28,8 +28,11 @@ module.exports = function (config) {
             'node_modules/lodash/dist/lodash.min.js',
             'app.js',
             'shell/**/*.js',
+            'shell/**/*.html',
             'authentication/**/*.js',
+            'authentication/**/*.html',
             'scheduler/**/*.js',
+            'scheduler/**/*.html',
             'test/**/*.js'
         ],
 
@@ -43,12 +46,16 @@ module.exports = function (config) {
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            './**/*.html': ['ng-html2js'],
-            './**/*.js': ['coverage']
+            'app.js': ['coverage'],
+            'shell/**/*.js': ['coverage'],
+            'shell/**/*.html': ['ng-html2js'],
+            'authentication/**/*.js': ['coverage'],
+            'authentication/**/*.html': ['ng-html2js'],
+            'scheduler/**/*.js': ['coverage'],
+            'scheduler/**/*.html': ['ng-html2js']
         },
 
         ngHtml2JsPreprocessor: {
-            prependPrefix: '',
             // setting this option will create a single module that contains templates
             // from all the files, so you can load them all with module('templates')
             moduleName: 'templates'
@@ -57,7 +64,7 @@ module.exports = function (config) {
         // test results reporter to use
         // possible values: 'dots', 'progress'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ['dots'],
+        reporters: ['dots', 'coverage'],
 
         // don't shut down phantom instance for 1 minute
         // because should be able to reuse the instance
@@ -88,6 +95,11 @@ module.exports = function (config) {
 
         // Concurrency level
         // how many browser should be started simultaneous
-        concurrency: Infinity
-    })
+        concurrency: Infinity,
+
+        coverageReporter: {
+            type: 'html',
+            dir: 'coverage'
+        }
+    });
 };

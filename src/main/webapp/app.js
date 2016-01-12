@@ -2,7 +2,7 @@
  * eventsFactory.js
  * Date of creation: 11.01.2016
  *
- * Copyright (c) CompuGroup Medical Software
+ * Copyright Mykola Smolyanskyy
  */
 
 /**

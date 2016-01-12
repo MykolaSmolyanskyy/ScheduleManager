@@ -16,8 +16,8 @@
 (function () {
     'use strict';
 
-    angular.module('SchedulingManager').factory('authFactory', ['$q', '$http', '$cookies', 'URL_CONSTANTS',
-        function ($q, $http, $cookies, URL_CONSTANTS) {
+    angular.module('SchedulingManager').factory('authFactory', ['$q', '$http', '$cookies', 'URL_CONSTANTS', '$log',
+        function ($q, $http, $cookies, URL_CONSTANTS, $log) {
             var _login,
                 _logout,
                 _getUserName,
@@ -29,13 +29,13 @@
                 var deferred = $q.defer();
 
                 $http.post(URL_CONSTANTS.BASE_URL + 'login?username=' + credentials.username + '&password=' + credentials.password, {}).success(function (data, status) {
-                    if (status === 401) {
-                        deferred.resolve('Error. Please check your credentials.')
-                    }
-
                     deferred.resolve(data);
-                }).error(function (error) {
-                    console.error(error);
+                }).error(function (error, status) {
+                    if (status === 401) {
+                        deferred.resolve('Error. Please check your credentials.');
+                        return;
+                    }
+                    $log.error(error);
                     deferred.reject(error);
                 });
 
@@ -48,7 +48,7 @@
                 $http.get(URL_CONSTANTS.BASE_URL + 'logout').success(function (data) {
                     deferred.resolve(data);
                 }).error(function (error) {
-                    console.error(error);
+                    $log.error(error);
                     deferred.reject(error);
                 });
 

@@ -18,17 +18,17 @@
     angular.module('SchedulingManager').factory('eventsHelperFactory', ['EVENT_TYPES',
         function (EVENT_TYPES) {
             var _sortEvents,
-                birthdayEvents = {
+                meetingEvents = {
                     color: '#f00',
                     textColor: 'yellow',
                     events: []
                 },
-                meetingEvents = {
+                freeTimeEvents = {
                     color: '#014682',
                     textColor: 'green',
                     events: []
                 },
-                partyEvents = {
+                developmentEvents = {
                     color: '#7a43b6',
                     textColor: 'blue',
                     events: []
@@ -40,23 +40,23 @@
                     switch (evt.type) {
                         case EVENT_TYPES.MEETING:
                         {
-                            birthdayEvents.events.push(evt);
+                            meetingEvents.events.push(evt);
                             break;
                         }
                         case EVENT_TYPES.FREE_TIME:
                         {
-                            meetingEvents.events.push(evt);
+                            freeTimeEvents.events.push(evt);
                             break;
                         }
                         case EVENT_TYPES.DEVELOPMENT:
                         {
-                            partyEvents.events.push(evt);
+                            developmentEvents.events.push(evt);
                             break;
                         }
                     }
                 });
 
-                return [birthdayEvents, partyEvents, meetingEvents];
+                return [meetingEvents, freeTimeEvents, developmentEvents];
             };
 
             return {
