@@ -1,4 +1,4 @@
-package com.ScheduleManager.dao.impl;
+package com.ScheduleManager.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,12 +8,14 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import com.ScheduleManager.controller.ApiController;
 import com.ScheduleManager.dao.EventDAO;
 import com.ScheduleManager.dao.UserDAO;
+import com.ScheduleManager.dao.impl.JdbcEventDAO;
+import com.ScheduleManager.dao.impl.JdbcUserDAO;
 
 /**
  * @author Alex Bilobrovets
  */
 @Configuration
-public class DAOConfigTest
+public class TestConfig
 {
     @Bean
     public UserDAO userDAO()

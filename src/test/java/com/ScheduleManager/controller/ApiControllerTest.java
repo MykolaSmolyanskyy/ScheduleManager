@@ -1,5 +1,6 @@
 package com.ScheduleManager.controller;
 
+import javax.servlet.http.Cookie;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +13,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.ScheduleManager.dao.impl.DAOConfigTest;
+import com.ScheduleManager.config.TestConfig;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -22,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = { DAOConfigTest.class })
+@ContextConfiguration(classes = { TestConfig.class })
 public class ApiControllerTest
 {
     @Autowired
@@ -43,7 +44,9 @@ public class ApiControllerTest
                     .andExpect(status().isOk())
                     .andExpect(content().contentType("application/json"))
                     .andExpect(jsonPath("$.username").value("alexb"))
-                    .andExpect(jsonPath("$.name").value("Alex Bilobrovets"));
+                    .andExpect(jsonPath("$.name").value("Alex Bilobrovets"))
+                    .andExpect(cookie().value("id", "1"))
+                    .andExpect(cookie().value("username", "alexb"));
 
         this.mockMvc.perform(get("/login?username=alexb&password=1234").accept("application/json"))
                     .andExpect(status().isUnauthorized());
@@ -52,7 +55,26 @@ public class ApiControllerTest
     @Test
     public void testLogout() throws Exception
     {
+        MockHttpServletRequestBuilder request;
 
+        Cookie cookieId = new Cookie("id", String.valueOf(1));
+        Cookie cookieUsername = new Cookie("username", "alexb");
+
+        cookieId.setMaxAge(60 * 10);
+        cookieId.setPath("/");
+        cookieId.setHttpOnly(false);
+        cookieId.setSecure(false);
+
+        cookieUsername.setMaxAge(60 * 10);
+        cookieUsername.setPath("/");
+        cookieUsername.setHttpOnly(false);
+        cookieUsername.setSecure(false);
+
+        request = get("/calendar?userId=1").accept("application/json").sessionAttr("id", 1).cookie(cookieId, cookieUsername);
+
+        this.mockMvc.perform(request)
+                    .andExpect(cookie().doesNotExist("id"))
+                    .andExpect(cookie().doesNotExist("username"));
     }
 
     @Test

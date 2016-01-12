@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.ScheduleManager.config.TestConfig;
 import com.ScheduleManager.dao.EventDAO;
 import com.ScheduleManager.model.Event;
 
@@ -17,7 +18,7 @@ import static org.junit.Assert.assertTrue;
  * @author Alex Bilobrovets
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = DAOConfigTest.class)
+@ContextConfiguration(classes = TestConfig.class)
 public class JdbcEventDAOTest
 {
     @Autowired

@@ -147,7 +147,7 @@ public class ApiController
         {
             for (Cookie cookie : cookies)
             {
-                if (cookie.getValue().equals("id") || cookie.getValue().equals("username"))
+                if (cookie.getName().equals("id") || cookie.getName().equals("username"))
                 {
                     cookie.setValue(null);
                     cookie.setMaxAge(0);
