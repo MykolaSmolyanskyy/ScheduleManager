@@ -36,13 +36,6 @@ public class ApiController
     @Autowired
     private EventDAO eventDAO;
 
-    //@ResponseBody
-    //@RequestMapping(value = "/login", produces = "application/json", consumes= MediaType.APPLICATION_JSON_UTF8_VALUE)
-    //public String login(@RequestBody Credentials credentials,
-    //                    HttpServletResponse response,
-    //                    HttpSession session)
-    //{
-
     @ResponseBody
     @RequestMapping(value = "/login", produces = "application/json")
     public String login(@RequestParam("username") String login,
@@ -154,7 +147,7 @@ public class ApiController
         {
             for (Cookie cookie : cookies)
             {
-                if (cookie.getValue().equals("id") || cookie.getValue().equals("username"))
+                if (cookie.getName().equals("id") || cookie.getName().equals("username"))
                 {
                     cookie.setValue(null);
                     cookie.setMaxAge(0);
