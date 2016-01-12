@@ -8,7 +8,7 @@
     'use strict';
 
     angular.module('SchedulingManager').constant('URL_CONSTANTS', {
-            BASE_URL: 'http://localhost:8080/api/'
+            BASE_URL: 'api/'
         }
     );
 })();
