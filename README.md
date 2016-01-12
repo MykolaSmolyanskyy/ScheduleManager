@@ -10,10 +10,7 @@ Front-end:
 2. Bootstrap
 3. http://angular-ui.github.io/ui-calendar/
 
-# Setup
-1. Install Java 8+
-2. Install Apache Tomcat v9+
-3. Install Maven
-4. Enter project root and execute mvn package
-5. Copy target/ROOT.war package to the <tomcat_installation>/webapps
-6. Run Tomcat Server
+# Setup in 3 steps:
+1. Install Java 8+ & Maven 3+
+2. Enter project root and execute mvn package
+3. Execute java -jar target/dependency/jetty-runner.jar target/ROOT.war
