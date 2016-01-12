@@ -2,6 +2,6 @@
 /.idea
 /target
 /out
-/node_modules
 /src/main/webapp/node
 /src/main/webapp/node_modules
+/src/main/webapp/coverage
