@@ -2,10 +2,13 @@
  * urlConstants.js
  * Date of creation: 11.01.2016
  *
- * Copyright (c) CompuGroup Medical Software
+ * Copyright Mykola Smolyanskyy
  */
+(function () {
+    'use strict';
 
-app.constant('URL_CONSTANTS', {
-        BASE_URL: 'http://localhost:8080/api/'
-    }
-);
+    angular.module('SchedulingManager').constant('URL_CONSTANTS', {
+            BASE_URL: 'api/'
+        }
+    );
+})();

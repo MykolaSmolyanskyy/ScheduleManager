@@ -2,8 +2,8 @@
  * baseObserver.js
  * Date of creation: 11.01.2016
  *
- * Copyright (c) CompuGroup Medical Software
- */
+ * Copyright Mykola Smolyanskyy
+*/
 
 (function () {
     'use strict';
@@ -15,7 +15,7 @@
      * @description Base class for all observers
      *
      */
-    app.factory('BaseObserver', [
+    angular.module('SchedulingManager').factory('BaseObserver', [
             function () {
                 /**
                  * @ngdoc method

@@ -2,7 +2,7 @@
  * scheduleObserver.js
  * Date of creation: 11.01.2016
  *
- * Copyright (c) CompuGroup Medical Software
+ * Copyright Mykola Smolyanskyy
  */
 
 (function () {
@@ -15,7 +15,7 @@
      * @description Notifies scheduler to load user's events.
      *
      */
-    app.factory('ScheduleObserver', ['BaseObserver',
+    angular.module('SchedulingManager').factory('ScheduleObserver', ['BaseObserver',
             function (BaseObserver) {
                 var _subscribers =[];
 
