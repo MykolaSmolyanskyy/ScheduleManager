@@ -2,7 +2,7 @@
  * authFactory.js
  * Date of creation: 11.01.2016
  *
- * Copyright (c) CompuGroup Medical Software
+ * Copyright Mykola Smolyanskyy
  */
 
 /**
@@ -13,132 +13,136 @@
  * Contains service for authentication
  */
 
-app.factory('authFactory', ['$q', '$http', '$cookies', 'URL_CONSTANTS',
-    function ($q, $http, $cookies, URL_CONSTANTS) {
-        var _login,
-            _logout,
-            _getUserName,
-            _isAuthenticated,
-            _getUserId,
-            _clearCookies;
+(function () {
+    'use strict';
 
-        _login = function (credentials) {
-            var deferred = $q.defer();
+    angular.module('SchedulingManager').factory('authFactory', ['$q', '$http', '$cookies', 'URL_CONSTANTS',
+        function ($q, $http, $cookies, URL_CONSTANTS) {
+            var _login,
+                _logout,
+                _getUserName,
+                _isAuthenticated,
+                _getUserId,
+                _clearCookies;
 
-            $http.post(URL_CONSTANTS.BASE_URL + 'login?username=' + credentials.username + '&password=' + credentials.password, {}).success(function (data, status) {
-                if (status == '401') {
-                    deferred.resolve('Error. Please check your credentials.')
-                }
+            _login = function (credentials) {
+                var deferred = $q.defer();
 
-                deferred.resolve(data);
-            }).error(function (error) {
-                console.error(error);
-                deferred.reject(error);
-            });
+                $http.post(URL_CONSTANTS.BASE_URL + 'login?username=' + credentials.username + '&password=' + credentials.password, {}).success(function (data, status) {
+                    if (status === 401) {
+                        deferred.resolve('Error. Please check your credentials.')
+                    }
 
-            return deferred.promise;
-        };
+                    deferred.resolve(data);
+                }).error(function (error) {
+                    console.error(error);
+                    deferred.reject(error);
+                });
 
-        _logout = function () {
-            var deferred = $q.defer();
+                return deferred.promise;
+            };
 
-            $http.get(URL_CONSTANTS.BASE_URL + 'logout').success(function (data) {
-                deferred.resolve(data);
-            }).error(function (error) {
-                console.error(error);
-                deferred.reject(error);
-            });
+            _logout = function () {
+                var deferred = $q.defer();
 
-            return deferred.promise;
-        };
+                $http.get(URL_CONSTANTS.BASE_URL + 'logout').success(function (data) {
+                    deferred.resolve(data);
+                }).error(function (error) {
+                    console.error(error);
+                    deferred.reject(error);
+                });
 
-        _getUserName = function () {
-            var username = $cookies.get('username');
-            return username ? username : null;
-        };
+                return deferred.promise;
+            };
 
-        _getUserId = function () {
-            var userId = $cookies.get('id');
-            return userId ? userId : null;
-        };
+            _getUserName = function () {
+                var username = $cookies.get('username');
+                return username ? username : null;
+            };
 
-        _isAuthenticated = function () {
-            var userId = $cookies.get('id');
+            _getUserId = function () {
+                var userId = $cookies.get('id');
+                return userId ? userId : null;
+            };
 
-            return userId ? true : false;
-        };
+            _isAuthenticated = function () {
+                var userId = $cookies.get('id');
 
-        _clearCookies = function () {
-            $cookies.remove('username');
-            $cookies.remove('id');
-        };
+                return userId ? true : false;
+            };
 
-        return {
-            /**
-             * @ngdoc method
-             * @module SchedulingManager
-             * @name authFactory#login
-             * @param {object} username and password
-             * @return {object} promise, that resolves with object containing username, id and expiration date
-             *
-             * @description
-             * Login user
-             */
-            login: _login,
+            _clearCookies = function () {
+                $cookies.remove('username');
+                $cookies.remove('id');
+            };
 
-            /**
-             * @ngdoc method
-             * @module SchedulingManager
-             * @name authFactory#logout
-             * @return {object} promise, that resolves with object containing username, id and expiration date
-             *
-             * @description
-             * Logout user
-             */
-            logout: _logout,
+            return {
+                /**
+                 * @ngdoc method
+                 * @module SchedulingManager
+                 * @name authFactory#login
+                 * @param {object} username and password
+                 * @return {object} promise, that resolves with object containing username, id and expiration date
+                 *
+                 * @description
+                 * Login user
+                 */
+                login: _login,
 
-            /**
-             * @ngdoc method
-             * @module SchedulingManager
-             * @name authFactory#getUserName
-             * @return {string} username of current user
-             *
-             * @description
-             * Gets username of current user
-             */
-            getUserName: _getUserName,
+                /**
+                 * @ngdoc method
+                 * @module SchedulingManager
+                 * @name authFactory#logout
+                 * @return {object} promise, that resolves with object containing username, id and expiration date
+                 *
+                 * @description
+                 * Logout user
+                 */
+                logout: _logout,
 
-            /**
-             * @ngdoc method
-             * @module SchedulingManager
-             * @name authFactory#isAuthenticated
-             * @return {boolean} boolean value that uses to know whether user is logged in
-             *
-             * @description
-             * Gets true/false whether user logged in
-             */
-            isAuthenticated: _isAuthenticated,
+                /**
+                 * @ngdoc method
+                 * @module SchedulingManager
+                 * @name authFactory#getUserName
+                 * @return {string} username of current user
+                 *
+                 * @description
+                 * Gets username of current user
+                 */
+                getUserName: _getUserName,
 
-            /**
-             * @ngdoc method
-             * @module SchedulingManager
-             * @name authFactory#getUserId
-             * @return {number} user id
-             *
-             * @description
-             * Gets user id
-             */
-            getUserId: _getUserId,
+                /**
+                 * @ngdoc method
+                 * @module SchedulingManager
+                 * @name authFactory#isAuthenticated
+                 * @return {boolean} boolean value that uses to know whether user is logged in
+                 *
+                 * @description
+                 * Gets true/false whether user logged in
+                 */
+                isAuthenticated: _isAuthenticated,
 
-            /**
-             * @ngdoc method
-             * @module SchedulingManager
-             * @name authFactory#clearCookies
-             *
-             * @description
-             * Clears current user from cookies
-             */
-            clearCookies: _clearCookies
-        };
-    }
-]);
+                /**
+                 * @ngdoc method
+                 * @module SchedulingManager
+                 * @name authFactory#getUserId
+                 * @return {number} user id
+                 *
+                 * @description
+                 * Gets user id
+                 */
+                getUserId: _getUserId,
+
+                /**
+                 * @ngdoc method
+                 * @module SchedulingManager
+                 * @name authFactory#clearCookies
+                 *
+                 * @description
+                 * Clears current user from cookies
+                 */
+                clearCookies: _clearCookies
+            };
+        }
+    ]);
+})();
