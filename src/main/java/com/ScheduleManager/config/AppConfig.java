@@ -37,7 +37,7 @@ public class AppConfig
     {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:h2:file:~/db;USER=user;PASSWORD=pwd");
+        dataSource.setUrl("jdbc:h2:mem:db;DB_CLOSE_DELAY=-1");
 
         // NOTE: only for demonstration purposes we initialize tables here
         // NOTE: simple db structure

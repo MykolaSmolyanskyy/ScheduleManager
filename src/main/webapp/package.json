@@ -5,7 +5,20 @@
   "author": "https://github.com/MykolaSmolyanskyy/ScheduleManager/contributors",
   "homepage": "https://github.com/MykolaSmolyanskyy/ScheduleManager",
   "main": "src/main/webapp/app.js",
-  "dependencies": {},
+  "dependencies": {
+    "angular": "1.4",
+    "angular-cookies": "1.4",
+    "angular-route": "1.4",
+    "angular-ui-bootstrap": "0.14",
+    "angular-ui-calendar": "1.0",
+    "bootstrap": "4.0",
+    "cookie": "0.2",
+    "fullcalendar": "2.6",
+    "jquery": "2.1",
+    "lodash": "2.4",
+    "moment": "2.11",
+    "tether": "1.1"
+  },
   "devDependencies": {
     "angular": "1.4",
     "angular-cookies": "1.4",
