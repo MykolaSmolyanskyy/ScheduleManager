@@ -64,18 +64,8 @@ public class ApiController
 
         session.setAttribute("id", user.getId());
 
-        Cookie cookieId = new Cookie("id", String.valueOf(user.getId()));
-        Cookie cookieUsername = new Cookie("username", user.getLogin());
-
-        cookieId.setMaxAge(60 * 10);
-        cookieId.setPath("/");
-        cookieId.setHttpOnly(false);
-        cookieId.setSecure(false);
-
-        cookieUsername.setMaxAge(60 * 10);
-        cookieUsername.setPath("/");
-        cookieUsername.setHttpOnly(false);
-        cookieUsername.setSecure(false);
+        Cookie cookieId = makeCookie("id", String.valueOf(user.getId()));
+        Cookie cookieUsername = makeCookie("username", user.getLogin());
 
         response.addCookie(cookieId);
         response.addCookie(cookieUsername);
@@ -156,5 +146,16 @@ public class ApiController
                 }
             }
         }
+    }
+
+    private Cookie makeCookie(String name, String value) {
+        Cookie cookie = new Cookie(name, value);
+
+        cookie.setMaxAge(60 * 10);
+        cookie.setPath("/");
+        cookie.setHttpOnly(false);
+        cookie.setSecure(false);
+
+        return cookie;
     }
 }
